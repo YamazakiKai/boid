@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class BoidController : MonoBehaviour
 {
-    public int num;        // ドローンの総数
+    // ドローンの総数
+    public int Num;
 
     public Vector3 AveragePos;     // ポジションの平均値
-    public float AverageRot;     // ローテーションの平均値
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    public float AverageAngle;     // ローテーションの平均値
 
     // Update is called once per frame
     void Update()
@@ -27,31 +22,31 @@ public class BoidController : MonoBehaviour
     /// </summary>
     void Center()
     {
-        // 子オブジェクトの総数を代入
-        num = this.transform.childCount;
+        // 子オブジェクトの総数
+        Num = this.transform.childCount;
         // 合計(position)
-        Vector3 totalpos = Vector3.zero;
+        Vector3 totalPos = Vector3.zero;
         // 合計(rotation)
-        float totalrot = 0;
+        float totalAngle = 0;
 
-        for (int i = 0; i < num; i++)
+        for (int i = 0; i < Num; i++)
         {
             // 子オブジェクトのの参照
-            GameObject Childs = transform.GetChild(i).gameObject;
+            GameObject child = transform.GetChild(i).gameObject;
 
             // Position
             // 子オブジェクトのポジション取得
-            Vector3 childpos = Childs.transform.position;
-            totalpos += childpos;
+            Vector3 childPos = child.transform.position;
+            totalPos += childPos;
 
             // Rotation
             // 子オブジェクトのローテーション取得
-            float childrot = Childs.transform.localEulerAngles.y;
-            totalrot += childrot;
+            float childRot = child.transform.localEulerAngles.y;
+            totalAngle += childRot;
         }
         // 平均(position)
-        AveragePos = totalpos / num;
+        AveragePos = totalPos / Num;
         // 平均(rotation)
-        AverageRot = totalrot / num;
+        AverageAngle = totalAngle / Num;
     }
 }
