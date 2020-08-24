@@ -384,7 +384,6 @@ MonoBehaviour:
   NormalSpeed: 3
   HighSpeed: 6
   RowSpeed: 1
-  Radius: 0
   Distance: 2
 --- !u!1 &4165520044550024662
 GameObject:
