@@ -147,7 +147,7 @@ PrefabInstance:
     - target: {fileID: 4165520044523608523, guid: 610f7b43b1b0c7d4ab3dc7c419618c3d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.3
       objectReference: {fileID: 0}
     - target: {fileID: 4165520044523608523, guid: 610f7b43b1b0c7d4ab3dc7c419618c3d,
         type: 3}
@@ -216,7 +216,7 @@ PrefabInstance:
     - target: {fileID: 4165520044523608523, guid: 610f7b43b1b0c7d4ab3dc7c419618c3d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4
+      value: -3.4
       objectReference: {fileID: 0}
     - target: {fileID: 4165520044523608523, guid: 610f7b43b1b0c7d4ab3dc7c419618c3d,
         type: 3}
@@ -483,7 +483,7 @@ PrefabInstance:
     - target: {fileID: 4165520044523608523, guid: 610f7b43b1b0c7d4ab3dc7c419618c3d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.6
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 4165520044523608523, guid: 610f7b43b1b0c7d4ab3dc7c419618c3d,
         type: 3}
@@ -747,9 +747,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f909b22bd349644b9a4eafa76fd62d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  num: 0
+  Num: 0
   AveragePos: {x: 0, y: 0, z: 0}
-  AverageRot: 0
+  AverageAngle: 0
 --- !u!4 &1130832815 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4165520044523608523, guid: 610f7b43b1b0c7d4ab3dc7c419618c3d,

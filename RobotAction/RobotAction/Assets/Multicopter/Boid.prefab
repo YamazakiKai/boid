@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 4165520044523608521}
   - component: {fileID: -543447405659365132}
   m_Layer: 0
-  m_Name: Multicopter
+  m_Name: Boid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -380,11 +380,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b6bf4d5d8e64744b8981fcad3f9e441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0
-  NormalSpeed: 1
-  HighSpeed: 2
-  RowSpeed: 0.5
-  radius: 2
+  Velocity: 0
+  NormalSpeed: 3
+  HighSpeed: 6
+  RowSpeed: 1
+  Radius: 0
   Distance: 2
 --- !u!1 &4165520044550024662
 GameObject:

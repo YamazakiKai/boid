@@ -117,7 +117,7 @@ MonoBehaviour:
   m_MinSize: {x: 911, y: 442}
   m_MaxSize: {x: 22006, y: 10021}
   vertical: 0
-  controlID: 40
+  controlID: 98
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 442}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
-  controlID: 103
+  controlID: 34
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -401,9 +401,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 2.5775228, y: 17.505865, z: 60.136}
+    m_Target: {x: 0, y: 3.29, z: -12}
     speed: 2
-    m_Value: {x: 2.5775228, y: 17.505865, z: 60.136}
+    m_Value: {x: 0, y: 3.29, z: -12}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -453,9 +453,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.0016553133, y: 0.9818142, z: -0.1896452, w: -0.008540084}
   m_Size:
-    m_Target: 4.588935
+    m_Target: 90.379616
     speed: 2
-    m_Value: 4.588935
+    m_Value: 90.379616
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -509,23 +509,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 482e0000
-      m_LastClickedID: 0
-      m_ExpandedIDs: 6afbffff
+      m_SelectedIDs: 68fbffff
+      m_LastClickedID: -1176
+      m_ExpandedIDs: 6afbffff80330000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Boid (1)
+        m_OriginalName: Boid (1)
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -1176
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 9}
       m_SearchString: 
@@ -574,20 +574,19 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Multicopter
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Multicopter
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: "C:\\Users\\gesok\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\3D\u30D7\u30ED\u30B0\u30E9\u30DF\u30F3\u30B0\\Unity
-    Samples\\RobotAction\\RobotAction"
+  m_LastProjectPath: C:\repos\boid\RobotAction\RobotAction
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 6e340000
-    m_LastClickedID: 13422
+    m_SelectedIDs: 6a340000
+    m_LastClickedID: 13418
     m_ExpandedIDs: 000000006234000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0

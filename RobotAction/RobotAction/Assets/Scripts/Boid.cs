@@ -8,7 +8,7 @@ public class Boid : MonoBehaviour
     BoidController boid;
 
     // 速度
-    public float Speed;
+    public float Velocity;
     [SerializeField]
     float NormalSpeed,HighSpeed,RowSpeed;
 
@@ -16,7 +16,7 @@ public class Boid : MonoBehaviour
     float CircleX;
     float CircleY;
     float CircleZ;
-    [SerializeField]
+    // 半径
     float Radius;
 
     // 三平方の計算用変数
@@ -38,14 +38,16 @@ public class Boid : MonoBehaviour
     void Start()
     {
         // 速度を通常速度で初期化
-        Speed = NormalSpeed;
+        Velocity = NormalSpeed;
+
+        Radius = Distance;
     }
 
     // Update is called once per frame
     void Update()
     {
         // 前進
-        gameObject.transform.Translate(0, 0, Time.deltaTime * Speed);
+        gameObject.transform.Translate(0, 0, Time.deltaTime * Velocity);
         // 中心よりxまたはzが2.0f以上離れているとき
         if (gameObject.transform.position.x - boid.AveragePos.x >= Distance ||
             gameObject.transform.position.x - boid.AveragePos.x <= -Distance ||
@@ -53,32 +55,52 @@ public class Boid : MonoBehaviour
             gameObject.transform.position.z - boid.AveragePos.z <= -Distance)
         {
             // 整列(Alingment)
-            Transform Transform = this.transform;
-            Vector3 localAngle = Transform.localEulerAngles;
+            Transform transform = this.transform;
+            Vector3 localAngle = transform.localEulerAngles;
             // 全体の角度の平均に回転させる
-            localAngle.y = boid.AverageRot;
-            Transform.localEulerAngles = localAngle;
+            localAngle.y = boid.AverageAngle;
+            transform.localEulerAngles = localAngle;
 
-            // 中心点よりも前にいるとき
-            if (gameObject.transform.position.z > boid.AveragePos.z)
-                Speed = NormalSpeed;   // 速度を下げる
-            // 中心点よりも後ろにいるとき
-            else if (gameObject.transform.position.z < boid.AveragePos.z)
-                Speed = HighSpeed;  // 速度を上げる
-
+            // 速度調整
+            // 中心点よりも後にいたら速度を上げる
+            // 中心点よりも前にいたら速度を下げる
+            VelocityAdjustment(boid.AveragePos.z, gameObject.transform.position.z);
+            
             // 結合(Cohesion)
             Cohesion();
         }
         // 当たり判定
         HitChk();
     }
+
+    /// <summary>
+    /// 速度調整
+    /// </summary>
+    /// <param name="firstTarget"></param>
+    /// <param name="secondaryTarget"></param>
+    void VelocityAdjustment(float firstTarget, float secondaryTarget)
+    {
+        if (firstTarget > secondaryTarget)
+        {
+            Velocity = HighSpeed;  // 速度を上げる
+        }
+        else if (firstTarget < secondaryTarget)
+        {
+            Velocity = RowSpeed;  // 速度を下げる
+        }
+        else
+        {
+            Velocity = NormalSpeed;  // 通常の速度にする
+        }
+    }
+
     /// <summary>
     /// 結合(Cohesion)
     /// </summary>
     void Cohesion()
     {
         // 中心に向かって移動する
-        transform.position = Vector3.MoveTowards(transform.position,boid.AveragePos,Time.deltaTime * Speed / 2);
+        transform.position = Vector3.MoveTowards(transform.position,boid.AveragePos,Time.deltaTime * Velocity / Distance);
     }
     /// <summary>
     /// 当たり判定
@@ -89,7 +111,7 @@ public class Boid : MonoBehaviour
         CircleX = transform.position.x;
         CircleY = transform.position.y;
         CircleZ = transform.position.z;
-        for (int i = 0; i < boid.num; i++)
+        for (int i = 0; i < boid.Num; i++)
         {
             // 一つ目のオブジェクト参照
             GameObject Childs = boid.transform.GetChild(i).gameObject;
@@ -111,17 +133,16 @@ public class Boid : MonoBehaviour
             if (TwoPointsDiff <= Radius + child.Radius)
             {
                 // Separation(引き離し)
-                // 衝突しているオブジェクトよりも前にいたら
-                if (gameObject.transform.position.z > Childs.transform.position.z)
-                    Speed = HighSpeed;  // 速度を上げる
-                else
-                    Speed = RowSpeed;  // 速度を下げる
+                // 速度調整
+                // 衝突したオブジェクトよりも前にいたら速度を上げる
+                // 衝突したオブジェクトよりも後にいたら速度を下げる
+                VelocityAdjustment(gameObject.transform.position.z, child.transform.position.z);
                 break;
             }
             else
             {
                 // 通常の速度にする
-                Speed = NormalSpeed;
+                Velocity = NormalSpeed;
             }
         }
     }
