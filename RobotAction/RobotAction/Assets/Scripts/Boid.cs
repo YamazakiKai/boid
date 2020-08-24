@@ -7,6 +7,9 @@ public class Boid : MonoBehaviour
     // MainController型オブジェクト
     BoidController boid;
 
+    // 正面フラグ
+    public bool IsFront = false;
+
     // 速度
     public float Velocity;
     [SerializeField]
@@ -46,13 +49,24 @@ public class Boid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 当たり判定
+        HitChk();
+
+        /* 方向チェック
+        if (transform.localEulerAngles.y <= 360 && transform.localEulerAngles.y >= 270 ||
+            transform.localEulerAngles.y >= 0 && transform.localEulerAngles.y <= 90)
+            IsFront = true;
+        else if (transform.localEulerAngles.y > 90 && transform.localEulerAngles.y < 270)
+            IsFront = false;
+        */
+
         // 前進
         gameObject.transform.Translate(0, 0, Time.deltaTime * Velocity);
-        // 中心よりxまたはzが2.0f以上離れているとき
-        if (gameObject.transform.position.x - boid.AveragePos.x >= Distance ||
-            gameObject.transform.position.x - boid.AveragePos.x <= -Distance ||
-            gameObject.transform.position.z - boid.AveragePos.z >= Distance ||
-            gameObject.transform.position.z - boid.AveragePos.z <= -Distance)
+        // 中心よりxまたはzが距離間以上離れているとき
+        if (gameObject.transform.position.x - boid.AveragePos.x >= Distance * 2 ||
+            gameObject.transform.position.x - boid.AveragePos.x <= -Distance * 2 ||
+            gameObject.transform.position.z - boid.AveragePos.z >= Distance *2 ||
+            gameObject.transform.position.z - boid.AveragePos.z <= -Distance * 2)
         {
             // 整列(Alingment)
             Transform transform = this.transform;
@@ -64,13 +78,11 @@ public class Boid : MonoBehaviour
             // 速度調整
             // 中心点よりも後にいたら速度を上げる
             // 中心点よりも前にいたら速度を下げる
-            VelocityAdjustment(boid.AveragePos.z, gameObject.transform.position.z);
+            VelocityAdjustment(boid.AveragePos.z, gameObject.transform.position.z, HighSpeed, NormalSpeed);
             
             // 結合(Cohesion)
             Cohesion();
         }
-        // 当たり判定
-        HitChk();
     }
 
     /// <summary>
@@ -78,15 +90,15 @@ public class Boid : MonoBehaviour
     /// </summary>
     /// <param name="firstTarget"></param>
     /// <param name="secondaryTarget"></param>
-    void VelocityAdjustment(float firstTarget, float secondaryTarget)
+    void VelocityAdjustment(float firstTarget, float secondaryTarget, float firstSpeed, float secondarySpeed)
     {
         if (firstTarget > secondaryTarget)
         {
-            Velocity = HighSpeed;  // 速度を上げる
+            Velocity = firstSpeed;  // 速度を上げる
         }
         else if (firstTarget < secondaryTarget)
         {
-            Velocity = RowSpeed;  // 速度を下げる
+            Velocity = secondarySpeed;  // 速度を下げる
         }
         else
         {
@@ -136,7 +148,8 @@ public class Boid : MonoBehaviour
                 // 速度調整
                 // 衝突したオブジェクトよりも前にいたら速度を上げる
                 // 衝突したオブジェクトよりも後にいたら速度を下げる
-                VelocityAdjustment(gameObject.transform.position.z, child.transform.position.z);
+                VelocityAdjustment(gameObject.transform.position.z, child.transform.position.z, HighSpeed, RowSpeed);
+
                 break;
             }
             else
